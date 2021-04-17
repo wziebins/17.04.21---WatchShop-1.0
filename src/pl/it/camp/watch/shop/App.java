@@ -65,6 +65,9 @@ public class App {
                     boolean correctWatchReturn = database.returnWatch(idNumber1);
                     if (correctWatchReturn) {
                         System.out.println("Podaj ilość sztuk które chcesz zwrócić ");
+                    } else {
+                        System.out.println("Nie ma takiego zegarka !!");
+                        break;
                     }
                     int returnNumber = in.nextInt();
                     boolean correctQuantityReturn = database.quantityReturn(returnNumber, idNumber1);
