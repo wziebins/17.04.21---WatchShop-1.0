@@ -21,8 +21,7 @@ public class App {
             String login = reader.readLine();
             System.out.println("Podaj hasło: ");
             String password = reader.readLine();
-           boolean authResult = database.authenticate(login, password);
-           if (authResult) {
+           if (database.authenticate(login, password)) {
                break;
            }else{
                System.out.println("Nie poprawne dane !!");
@@ -35,25 +34,22 @@ public class App {
         }
         boolean flag = true;
         while (flag) {
-            GUI.showMainMenu();
+            GUI.getInstance().showMainMenu();
             switch (reader.readLine()) {
                 case "1":
-                    GUI.showAllWatches(database.getWatches());
+                    GUI.getInstance().showAllWatches(database.getWatches());
                     break;
                 case "2":
                     System.out.println("Podaj Numer ID zegarka: ");
                     String idNumber = reader.readLine();
-                    boolean correctWatchId = database.buyWatch(idNumber);
+                    boolean correctWatchId = database.availabilityChec(idNumber);
                     if (correctWatchId) {
                         System.out.println("Podaj ilość sztuk które chcesz zakupić: ");
                     } else {
-                        System.out.println("Nie ma takiego zegarka !!");
-                        System.out.println("Złóż zamówienie ponownie !!");
+                        System.out.println("Nie ma takiego zegarka !!\nZłóż zamówienie ponownie !! ");
                         break;
                     }
-                    int purchaseNumber = in.nextInt();
-                    boolean correctWatchQuantity = database.quantityOrder(purchaseNumber, idNumber);
-                    if (correctWatchQuantity) {
+                    if (database.sellWatch(in.nextInt(), idNumber)) {
                         System.out.println("Zamówienie zostało przyjte do realizacji !!");
                     } else {
                         System.out.println("Ilość zegarkow w magazynie jest nie wystarczająca !!");
@@ -62,16 +58,14 @@ public class App {
                 case "3":
                     System.out.println("Podaj Numer ID zegarka który chcesz zwrócić: ");
                     String idNumber1 = reader.readLine();
-                    boolean correctWatchReturn = database.returnWatch(idNumber1);
+                    boolean correctWatchReturn = database.availabilityChec(idNumber1); //Zmienić nazwę
                     if (correctWatchReturn) {
                         System.out.println("Podaj ilość sztuk które chcesz zwrócić ");
                     } else {
                         System.out.println("Nie ma takiego zegarka !!");
                         break;
                     }
-                    int returnNumber = in.nextInt();
-                    boolean correctQuantityReturn = database.quantityReturn(returnNumber, idNumber1);
-                    if (correctQuantityReturn) {
+                    if (database.quantityReturn(in.nextInt(), idNumber1)) {
                         System.out.println("Zwrot został przyjęty do realizacji !!");
                     }
                     break;

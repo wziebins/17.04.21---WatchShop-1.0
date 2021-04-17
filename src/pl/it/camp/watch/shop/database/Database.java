@@ -37,8 +37,7 @@ public class Database {
     public List<Watch> getWatches() {
         return watches;
     }
-
-    public boolean buyWatch(String idNumber) {
+    public boolean availabilityChec(String idNumber) {
         for (Watch watch : this.watches) {
             if (watch.getIdNumber().equals(idNumber) && watch.getQuantity() >= 0) {
                 return true;
@@ -46,30 +45,16 @@ public class Database {
         }
         return false;
     }
-
-    public boolean quantityOrder(int orderNumber, String idNumber) {
+    public boolean sellWatch(int orderNumber, String idNumber) {
         for (Watch watch : this.watches) {
             if (orderNumber <= watch.getQuantity() && watch.getIdNumber().equals(idNumber)) {
                 watch.sell(orderNumber);
-                System.out.println("Kwota do zapłaty: " + watch.price(orderNumber, watch.getPrice())+ " zł");
-                return true;
-            } else {
-                if (watch.getQuantity() <= 0 && watch.getIdNumber().equals(idNumber)) {
-                }
+                System.out.println("Kwota do zapłaty: " + watch.price(orderNumber, watch.getPrice())+ " zł"); // czy to wyliczanie kwoty można jakoś sprytnie przenieść do GUI ?
+                return true;                                                                                  // chodzi o to że bez Listy zegarków nie wczytuj mi ceny zegarka do wyliczenia kwoty
             }
         }
         return false;
     }
-
-    public boolean returnWatch(String idNumber1) {
-        for (Watch watch : this.watches) {
-            if (watch.getIdNumber().equals(idNumber1) && watch.getQuantity() >= 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean quantityReturn(int returnNumber, String idNumber1) {
         for (Watch watch : this.watches) {
             if (returnNumber > 0 && watch.getIdNumber().equals(idNumber1)) {
@@ -79,8 +64,6 @@ public class Database {
         }
         return false;
 }
-
-
     public boolean authenticate(String login, String password) {
         for (User currentUser : this.users) {
             if (currentUser.getLogin().equals(login) && currentUser.getPassword().equals(DigestUtils.md5Hex(password))) {

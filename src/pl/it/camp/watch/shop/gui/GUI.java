@@ -8,15 +8,25 @@ import java.util.List;
 
 
 public class GUI {
-    static public void showMainMenu() {
+
+    private static GUI instance = new GUI();
+
+    private GUI() {
+    }
+    public static GUI getInstance() {
+        if (instance == null) {
+            GUI.instance = new GUI();
+        }
+        return GUI.instance;
+    }
+    public void showMainMenu() {
         System.out.println("Wybierz opcje z menu:");
         System.out.println("1. Zegarki.");
         System.out.println("2. Złóż zamówienie.");
         System.out.println("3. Wycofaj zamówienie.");
         System.out.println("4. Wyjdź.");
     }
-
-    static public void showAllWatches(List<Watch> watches) {
+    public void showAllWatches(List<Watch> watches) {
         for (Watch watch : watches) {
             StringBuilder sb = new StringBuilder();
             sb.append(watch.getBrand())
@@ -60,5 +70,4 @@ public class GUI {
 
         }
     }
-
 }
