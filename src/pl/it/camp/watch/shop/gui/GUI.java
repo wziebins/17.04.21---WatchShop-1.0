@@ -14,7 +14,7 @@ public class GUI {
     private GUI() {
     }
     public static GUI getInstance() {
-        if (instance == null) {
+        if (GUI.instance == null) {
             GUI.instance = new GUI();
         }
         return GUI.instance;
@@ -67,7 +67,14 @@ public class GUI {
                 sb.append("Niedostepny");
             }
             System.out.println(sb.toString());
-
         }
+    }
+
+        public void showIntranceMenu() {
+            System.out.println("Witamy w sklepie ZEGARKOWO !!");
+            System.out.println("1. Zaloguj się !!");
+            System.out.println("2. Zarejestruj się !!");
+            System.out.println("3. Wyjście");
+
     }
 }

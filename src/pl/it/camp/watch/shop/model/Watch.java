@@ -1,6 +1,6 @@
 package pl.it.camp.watch.shop.model;
 
-public class Watch {
+public abstract class Watch {
     private String brand;
     private String model;
     private String origin;
@@ -10,8 +10,12 @@ public class Watch {
     private double price;
     private int quantity;
     private String idNumber;
+    private String availability;
 
-    public Watch(String brand, String model, String origin, String face, String mechanism, boolean waterProof, double price, int quantity, String idNumber) {
+
+    public Watch(String brand, String model, String origin,
+                 String face, String mechanism, boolean waterProof,
+                 double price, int quantity, String idNumber, String availability) {
         this.brand = brand;
         this.model = model;
         this.origin = origin;
@@ -21,6 +25,7 @@ public class Watch {
         this.price = price;
         this.quantity = quantity;
         this.idNumber = idNumber;
+        this.availability = availability;
     }
 
     public String getBrand() {
@@ -83,4 +88,6 @@ public class Watch {
     public double price(int i, double j){
         return i*j;
     }
+    abstract public String convertToDbRecord();
 }
+
